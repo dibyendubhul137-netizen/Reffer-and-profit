@@ -1,35 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Refer and Profit</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      text-align: center; 
-      background: linear-gradient(135deg, #ff7a18, #af002d 70%);
-      color: white; 
-      padding: 50px;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      color: white;
+      text-align: center;
     }
-    h1 { font-size: 32px; }
-    button {
-      background: white;
-      color: #af002d;
-      padding: 12px 24px;
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 12px;
+    }
+    input, button, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
       border: none;
       border-radius: 8px;
-      font-size: 18px;
+      font-size: 16px;
+    }
+    input {
+      background: #fff;
+      color: #333;
+    }
+    button {
+      background: #222;
+      color: #fff;
+      font-weight: bold;
       cursor: pointer;
     }
     button:hover {
-      background: #eee;
+      background: #000;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Refer and Profit 🎉</h1>
-  <p>Invite your friends and start earning today!</p>
-  <button onclick="alert('Coming Soon 🚀')">Get Started</button>
+  <div class="container">
+    <h1>Refer and Profit</h1>
+    <p>Grow with us – Earn Daily by Completing Tasks!</p>
+
+    <!-- Login -->
+    <div class="card" id="loginCard">
+      <h2>Login</h2>
+      <input type="text" id="userId" placeholder="Enter User ID">
+      <input type="password" id="loginPassword" placeholder="Enter Login Password">
+      <input type="password" id="paymentPassword" placeholder="Enter Payment Password">
+      <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="card" id="dashboard" style="display:none;">
+      <h2>Dashboard</h2>
+      <button onclick="showPlans()">Buy Plan</button>
+      <button onclick="showTasks()">Daily Task</button>
+      <button onclick="showRecharge()">Recharge</button>
+      <button onclick="showWithdraw()">Withdraw</button>
+    </div>
+
+    <!-- Plans -->
+    <div class="card" id="plans" style="display:none;">
+      <h2>Plans</h2>
+      <p>₹399 → 7 days → 3 ads/day → ₹8/ad</p>
+      <p>₹599 → 10 days → 5 ads/day → ₹10/ad</p>
+      <p>₹999 → 15 days → 7 ads/day → ₹15/ad</p>
+      <button onclick="backToDashboard()">Back</button>
+    </div>
+
+    <!-- Daily Tasks -->
+    <div class="card" id="tasks" style="display:none;">
+      <h2>Daily Task</h2>
+      <p>Watch ads to earn money. (Set by Admin)</p>
+      <button onclick="taskComplete()">✔ Complete Task</button>
+      <button onclick="backToDashboard()">Back</button>
+    </div>
+
+    <!-- Recharge -->
+    <div class="card" id="recharge" style="display:none;">
+      <h2>Recharge</h2>
+      <p>Send payment to <b>itsdibyendu10@okicici</b></p>
+      <button onclick="window.location.href='upi://pay?pa=itsdibyendu10@okicici&pn=ReferAndProfit&cu=INR'">Pay Now</button>
+      <button onclick="backToDashboard()">Back</button>
+    </div>
+
+    <!-- Withdraw -->
+    <div class="card" id="withdraw" style="display:none;">
+      <h2>Withdraw</h2>
+      <input type="text" id="withdrawName" placeholder="Full Name">
+      <input type="text" id="withdrawUpi" placeholder="UPI ID">
+      <input type="text" id="withdrawMobile" placeholder="Mobile Number">
+      <input type="password" id="withdrawPassword" placeholder="Payment Password">
+      <button onclick="withdraw()">Submit Withdraw</button>
+      <button onclick="backToDashboard()">Back</button>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      document.getElementById("loginCard").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+    }
+    function showPlans() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("plans").style.display = "block";
+    }
+    function showTasks() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("tasks").style.display = "block";
+    }
+    function showRecharge() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("recharge").style.display = "block";
+    }
+    function showWithdraw() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("withdraw").style.display = "block";
+    }
+    function backToDashboard() {
+      document.querySelectorAll(".card").forEach(card => card.style.display = "none");
+      document.getElementById("dashboard").style.display = "block";
+    }
+    function taskComplete() {
+      alert("Task completed! Earnings will be credited.");
+      backToDashboard();
+    }
+    function withdraw() {
+      let name = document.getElementById("withdrawName").value;
+      let upi = document.getElementById("withdrawUpi").value;
+      let mobile = document.getElementById("withdrawMobile").value;
+      let pass = document.getElementById("withdrawPassword").value;
+      alert("Withdraw Request Sent to Admin:\nName: " + name + "\nUPI: " + upi + "\nMobile: " + mobile);
+      backToDashboard();
+    }
+  </script>
 </body>
 </html>
