@@ -1,4 +1,6 @@
-// backend/server.js
+app.get("/", (req, res) => {
+  res.send("✅ Reffer and Profit backend is running!");
+});// backend/server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
